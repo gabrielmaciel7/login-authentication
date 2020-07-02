@@ -1,21 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
-const authController = require("./controllers/auth");
+const requireDir = require("require-dir");
 
 const app = express();
+
+app.use(express.json());
 
 mongoose.connect("mongodb://localhost:27017/login", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-app.use("/auth", authController);
+requireDir("./models");
 
-app.get("/", (req, res) => {
-  return res.json("Api running...");
-});
+app.use("/", require("./routes"));
 
 app.listen(3001, () => {
-  console.log("Listening on port 3001");
+  console.log("Starting api...");
 });

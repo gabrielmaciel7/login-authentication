@@ -1,13 +1,21 @@
-const express = require("express");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const router = express.Router();
+const Account = mongoose.model("Account");
 
-router.get("/sign-in", (req, res) => {
-  return res.json("Sign in");
-});
+const saltRounds = 10;
 
-router.get("/sign-up", (req, res) => {
-  return res.json("Sign up");
-});
+module.exports = {
+  async signin(req, res) {
+    return res.json("Sign in");
+  },
 
-module.exports = router;
+  async signup(req, res) {
+    const { email, password } = req.body;
+    const hash = bcrypt.hashSync(password, saltRounds);
+
+    const account = await Account.create({ email, password: hash });
+
+    return res.json(account);
+  },
+};
