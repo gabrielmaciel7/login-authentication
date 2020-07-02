@@ -5,6 +5,7 @@ const requireDir = require("require-dir");
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 mongoose.connect("mongodb://localhost:27017/login", {
   useNewUrlParser: true,
