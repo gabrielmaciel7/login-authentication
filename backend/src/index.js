@@ -2,7 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const requireDir = require("require-dir");
 
+const response = require("./middlewares/response");
+
 const app = express();
+
+app.use(response);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
