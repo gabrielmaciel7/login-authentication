@@ -5,8 +5,19 @@
   "response.json_not_found": "Not found.",
   "response.json_server_error": "Server error.",
 
+  "account.signin.success": "Success login!",
+  "account.signin.invalid": "Invalid data.",
+
   "account.signup.success": "Account created!",
   "account.signup.email_exists": "Account already exists.",
+
+  "account.signin.email.string.empty": "Email is required.",
+  "account.signin.email.any.required": "Email is required.",
+  "account.signin.email.email": "Invalid email.",
+  "account.signin.email.string.email": "Invalid email.",
+  "account.signin.password.any.required": "Password is required.",
+  "account.signin.password.string.empty": "Password is required.",
+  "account.signin.password.string.pattern.base": "Invalid password.",
 
   "account.signup.email.string.empty": "Email is required.",
   "account.signup.email.any.required": "Email is required.",
