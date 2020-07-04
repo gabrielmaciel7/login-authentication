@@ -6,6 +6,7 @@ const { accountSignUp, accountSignIn } = require("./validators/account");
 
 routes.post("/auth/sign-in", accountSignIn, authController.signin);
 routes.post("/auth/sign-up", accountSignUp, authController.signup);
+routes.post("/auth/refresh", authController.refresh);
 
 routes.get("/hello", authController.hello);
 
