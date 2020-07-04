@@ -53,4 +53,20 @@ module.exports = {
       refreshToken,
     });
   },
+
+  async hello(req, res) {
+    const { accountId } = req;
+
+    let account = null;
+
+    try {
+      account = await Account.findOne({ _id: accountId });
+    } catch (error) {
+      return res.jsonNotFound();
+    }
+
+    if (!account) return res.jsonNotFound();
+
+    return res.jsonOK(account);
+  },
 };

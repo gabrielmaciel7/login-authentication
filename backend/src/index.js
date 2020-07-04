@@ -3,10 +3,12 @@ const mongoose = require("mongoose");
 const requireDir = require("require-dir");
 
 const response = require("./middlewares/response");
+const checkJwt = require("./middlewares/jwt");
 
 const app = express();
 
 app.use(response);
+app.use(checkJwt);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
