@@ -23,7 +23,7 @@ module.exports = {
       return res.jsonBadRequest(null, getMessage("account.signin.invalid"));
 
     const token = generateJwt({ id: account.id });
-    const refreshToken = generateRefreshJwt({ id: account.id });
+    const refreshToken = generateRefreshJwt({ id: account.id, version: account.jwtVersion });
 
     return res.jsonOK(account, getMessage("account.signin.success"), {
       token,
@@ -46,7 +46,7 @@ module.exports = {
     const newAccount = await Account.create({ email, password: hash });
 
     const token = generateJwt({ id: newAccount.id });
-    const refreshToken = generateRefreshJwt({ id: newAccount.id });
+    const refreshToken = generateRefreshJwt({ id: newAccount.id, version: newAccount.jwtVersion });
 
     return res.jsonOK(newAccount, getMessage("account.signup.success"), {
       token,

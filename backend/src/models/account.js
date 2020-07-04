@@ -13,6 +13,11 @@ const AccountSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  jwtVersion: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 });
 
 AccountSchema.set("toJSON", {

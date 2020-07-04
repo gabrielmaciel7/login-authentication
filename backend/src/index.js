@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const requireDir = require("require-dir");
@@ -13,7 +15,7 @@ app.use(checkJwt);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-mongoose.connect("mongodb://localhost:27017/login", {
+mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
