@@ -26,6 +26,8 @@ requireDir("./models");
 
 app.use("/", require("./routes"));
 
-app.listen(3001, () => {
-  console.log("Starting api...");
+const PORT = 3001;
+
+app.listen(PORT, () => {
+  console.log("Starting api on port ", PORT);
 });
