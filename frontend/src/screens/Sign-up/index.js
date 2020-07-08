@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signUp } from "./SignUpActions";
 
 const SignUp = (props) => {
-  const { signUp } = props;
+  const { signUp, account } = props;
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -15,6 +15,11 @@ const SignUp = (props) => {
 
     signUp(data);
   };
+
+  if (account) {
+    return <Redirect to="/sign-in" />;
+  }
+
   return (
     <div className="container">
       <h1>Sign Up</h1>
