@@ -22,6 +22,7 @@ export default function (state = initialState, action) {
       if (refreshToken) setRefreshToken(refreshToken);
 
       return { ...initialState, account };
+
     default:
       return state;
   }

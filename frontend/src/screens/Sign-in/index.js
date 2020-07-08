@@ -1,16 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signIn } from "./SignInActions";
 
 const SignIn = (props) => {
-  const { signIn } = props;
+  const { signIn, account } = props;
+
+  if (account) {
+    return <Redirect to="/manage/portal" />;
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    signIn({ email: "gabrielmaciel.nave@gmail.com", password: "123" });
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    signIn(data);
   };
 
   return (
