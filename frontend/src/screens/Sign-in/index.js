@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signIn } from "../../actions/AccountActions";
+import { getFormData } from "../../helpers/form";
 
 const SignIn = (props) => {
   const { signIn, account } = props;
@@ -14,8 +15,7 @@ const SignIn = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
+    const data = getFormData(e);
 
     signIn(data);
   };

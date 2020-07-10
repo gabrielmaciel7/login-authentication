@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getApiUrl = (path) => {
-  return `http://172.18.80.156:3001${path}`;
+  return `http://localhost:3001${path}`;
 };
 
 export const getHeaders = () => {

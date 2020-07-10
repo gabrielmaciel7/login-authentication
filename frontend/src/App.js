@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 import Home from "./screens/Home";
@@ -6,7 +7,13 @@ import SignIn from "./screens/Sign-in";
 import SignUp from "./screens/Sign-up";
 import ManagePortal from "./screens/Manage/Portal";
 
-const App = () => {
+import { initAccount } from "./actions/AccountActions";
+
+const App = ({ initAccount }) => {
+  useEffect(() => {
+    initAccount();
+  }, [initAccount]);
+
   return (
     <BrowserRouter>
       <div>
@@ -38,4 +45,8 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return { account: state.account.account };
+};
+
+export default connect(mapStateToProps, { initAccount })(App);
