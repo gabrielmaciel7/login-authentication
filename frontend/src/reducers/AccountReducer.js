@@ -13,10 +13,12 @@ import {
   SIGN_UP,
   SIGN_OUT,
   INIT_ACCOUNT,
+  USERS_LIST
 } from "../actions/AccountActions";
 
 const initialState = {
   account: null,
+  accounts: []
 };
 
 export default function (state = initialState, action) {
@@ -45,11 +47,20 @@ export default function (state = initialState, action) {
 
       return { ...state, account: null };
     }
+
     case INIT_ACCOUNT: {
       const account = getAccount();
 
       return { ...state, account };
     }
+
+    case USERS_LIST: {
+      const response = payload ? payload.data : null;
+      const users = response ? response.data : null;
+
+      return { ...state, users };
+    }
+
     default:
       return state;
   }
