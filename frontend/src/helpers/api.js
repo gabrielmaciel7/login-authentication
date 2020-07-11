@@ -1,8 +1,6 @@
 import axios from "axios";
 
-import { getToken } from "../helpers/account";
-import { secondsToReadableTime } from "../helpers/datetime";
-import { getTokenExpire } from "../helpers/jwt";
+import { getToken, getRefreshToken } from "../helpers/account";
 
 export const getApiUrl = (path) => {
   return `http://localhost:3001${path}`;
@@ -12,12 +10,6 @@ export const getHeaders = () => {
   const token = getToken();
 
   if (!token) return {};
-
-  const expires = getTokenExpire(token);
-  const secondsToExpire = expires - Date.now() / 1000;
-  const readableTime = secondsToReadableTime(secondsToExpire);
-
-  console.log("*** helpers.api.getHeaders.readableTime", readableTime);
 
   return {
     Authorization: `Bearer ${token}`,
@@ -41,4 +33,16 @@ export const apiPost = (path, data = {}) => {
   };
 
   return axios.post(url, data, options);
+};
+
+export const apiRefreshToken = () => {
+  const url = getApiUrl("/auth/refresh");
+  const refreshToken = getRefreshToken();
+  const options = {
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+    },
+  };
+
+  return axios.post(url, {}, options);
 };

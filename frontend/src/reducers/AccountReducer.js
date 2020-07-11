@@ -13,12 +13,13 @@ import {
   SIGN_UP,
   SIGN_OUT,
   INIT_ACCOUNT,
-  USERS_LIST
+  USERS_LIST,
+  REFRESH_TOKEN,
 } from "../actions/AccountActions";
 
 const initialState = {
   account: null,
-  accounts: []
+  accounts: [],
 };
 
 export default function (state = initialState, action) {
@@ -59,6 +60,17 @@ export default function (state = initialState, action) {
       const users = response ? response.data : null;
 
       return { ...state, users };
+    }
+
+    case REFRESH_TOKEN: {
+      const response = payload ? payload.data : null;
+      const metadata = response ? response.metadata : null;
+
+      const token = metadata ? metadata.token : null;
+
+      if (token) setToken(token);
+
+      return state;
     }
 
     default:

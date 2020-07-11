@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./screens/Home";
 import SignIn from "./screens/Sign-in";
@@ -17,15 +17,6 @@ const App = ({ initAccount }) => {
   return (
     <BrowserRouter>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/sign-in">Sign-in</Link>
-              <Link to="/sign-up">Sign-up</Link>
-              <Link to="/manage/portal">Portal</Link>
-            </li>
-          </ul>
-        </nav>
         <Switch>
           <Route path="/sign-in">
             <SignIn />
