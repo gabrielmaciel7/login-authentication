@@ -65,20 +65,10 @@ module.exports = {
     });
   },
 
-  async hello(req, res) {
-    const { accountId } = req;
+  async users(req, res) {
+    const accounts = await Account.find();
 
-    let account = null;
-
-    try {
-      account = await Account.findOne({ _id: accountId });
-    } catch (error) {
-      return res.jsonNotFound();
-    }
-
-    if (!account) return res.jsonNotFound();
-
-    return res.jsonOK(account);
+    return res.jsonOK(accounts);
   },
 
   async refresh(req, res) {

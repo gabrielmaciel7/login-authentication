@@ -8,6 +8,6 @@ routes.post("/auth/sign-in", accountSignIn, authController.signin);
 routes.post("/auth/sign-up", accountSignUp, authController.signup);
 routes.post("/auth/refresh", authController.refresh);
 
-routes.get("/hello", authController.hello);
+routes.get("/users-list", authController.users);
 
 module.exports = routes;
