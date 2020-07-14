@@ -20,6 +20,7 @@ import {
 const initialState = {
   account: null,
   accounts: [],
+  message: "",
 };
 
 export default function (state = initialState, action) {

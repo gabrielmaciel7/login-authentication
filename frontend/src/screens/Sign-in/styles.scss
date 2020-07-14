@@ -1,0 +1,134 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  padding-bottom: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    background: var(--light-color-2);
+    width: 90%;
+    max-width: 500px;
+    margin: 32px auto;
+    padding: 32px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    color: var(--ok-color);
+  }
+
+  form {
+    width: 90%;
+    padding: 32px 16px 16px;
+    display: flex;
+    flex-direction: column;
+
+    .input {
+      margin-bottom: 24px;
+      position: relative;
+
+      &.error {
+        input {
+          border-bottom: 1px solid var(--error-color);
+        }
+      }
+    }
+
+    input,
+    button {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+
+      width: 100%;
+      padding: 8px 0;
+      border: none;
+      border-bottom: 1px solid var(--gray-color);
+      background-color: transparent;
+      color: var(--dark-color);
+      font-size: 1em;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 16px;
+      background-color: var(--gray-color-light);
+      color: var(--light-color);
+
+      &.valid {
+        background-color: var(--ok-color);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--ok-color-2);
+        }
+      }
+    }
+
+    input {
+      transition: 0.4s;
+
+      & ~ label {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        color: var(--gray-color);
+        transition: 0.4s;
+      }
+
+      &:focus,
+      &:valid,
+      &.withValue {
+        border-bottom: 1px solid var(--gray-color-dark);
+
+        & ~ label {
+          transform: translateY(-20px);
+          font-size: 0.8em;
+          color: var(--gray-color-dark);
+        }
+      }
+    }
+
+    span.error {
+      height: 24px;
+      display: flex;
+      padding: 0.2em 0;
+      color: var(--error-color);
+      font-size: 0.8em;
+    }
+
+    span.returnError {
+      height: 24px;
+      display: flex;
+      padding: 0.2em 0;
+      color: var(--error-color);
+      font-size: 0.8em;
+      font-weight: 700;
+    }
+  }
+
+  .sign-up {
+    display: flex;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      margin-left: 8px;
+      font-weight: 700;
+      color: var(--ok-color);
+
+      &:hover {
+        color: var(--ok-color-2);
+      }
+    }
+  }
+}

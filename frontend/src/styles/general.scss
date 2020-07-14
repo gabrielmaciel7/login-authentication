@@ -1,0 +1,31 @@
+:root {
+  --light-color: #f5f7eb;
+  --light-color-2: #E9EBDF;
+  --dark-color: #131313;
+  --gray-color: #383c40;
+  --gray-color-light: #636466;
+  --gray-color-dark: #1D2226;
+  --error-color: #E86138;
+  --ok-color: #3f7bc4;
+  --ok-color-2: #1A559C;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+
+html {
+  height: 100%;
+
+  body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+  }
+}
