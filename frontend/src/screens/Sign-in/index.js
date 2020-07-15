@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -6,7 +6,23 @@ import { signIn } from "../../actions/AccountActions";
 import { getFormData, customValidation } from "../../helpers/form";
 
 const SignIn = (props) => {
-  const { signIn, account } = props;
+  const { signIn, account, messageError } = props;
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (messageError && !account && !error) {
+      const span = document.querySelector("span.returnError");
+
+      span.innerHTML = messageError;
+
+      const timer = setTimeout(() => {
+        span.innerHTML = "";
+        setError(true);
+      }, 8000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [messageError, account, error]);
 
   if (account) {
     return <Redirect to="/manage/portal" />;
@@ -23,22 +39,14 @@ const SignIn = (props) => {
     field.addEventListener("blur", customValidation);
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     const data = getFormData(e);
 
-    signIn(data);
+    await signIn(data);
 
-    if (!account) {
-      const span = document.querySelector("span.returnError");
-
-      span.innerHTML = "Invalid account.";
-
-      setTimeout(() => {
-        span.innerHTML = "";
-      }, 5000);
-    }
+    setError(false);
   };
 
   return (
@@ -74,7 +82,10 @@ const SignIn = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { account: state.account.account };
+  return {
+    account: state.account.account,
+    messageError: state.account.messageError,
+  };
 };
 
 export default connect(mapStateToProps, { signIn })(SignIn);

@@ -7,16 +7,24 @@ export const INIT_ACCOUNT = "INIT_ACCOUNT";
 export const USERS_LIST = "USERS_LIST";
 export const REFRESH_TOKEN = "REFRESH_TOKEN";
 
-export const signIn = (data) => {
-  const payload = apiPost("/auth/sign-in", data);
+export const signIn = async (data) => {
+  let messageError = null;
+  const payload = await apiPost("/auth/sign-in", data).catch((error) => {
+    messageError =
+      error.response.data.message || error.response.data.metadata.error;
+  });
 
-  return { type: SIGN_IN, payload };
+  return { type: SIGN_IN, payload, messageError };
 };
 
-export const signUp = (data) => {
-  const payload = apiPost("/auth/sign-up", data);
+export const signUp = async (data) => {
+  let messageError = null;
+  const payload = await apiPost("/auth/sign-up", data).catch((error) => {
+    messageError =
+      error.response.data.message || error.response.data.metadata.error;
+  });
 
-  return { type: SIGN_UP, payload };
+  return { type: SIGN_UP, payload, messageError };
 };
 
 export const signOut = (data) => {

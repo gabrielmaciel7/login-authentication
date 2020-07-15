@@ -22,28 +22,35 @@ const SignUp = (props) => {
 
   return (
     <div className="container">
-      <h1>Sign Up</h1>
-      <div className="">
+      <div className="content">
+        <h1>Sign Up</h1>
         <form onSubmit={submitHandler}>
-          <div className="form-group">
+          <div className="input">
+            <input type="email" name="email" required />
             <label>E-mail</label>
-            <input type="text" name="email" />
+            <span className="error"></span>
           </div>
-          <div className="form-group">
+
+          <div className="input">
+            <input type="password" name="password" required />
             <label>Password</label>
-            <input type="password" name="password" />
+            <span className="error"></span>
           </div>
-          <div className="form-group">
+
+          <div className="input">
+            <input type="password" name="password_confirmation" required />
             <label>Password confirmation</label>
-            <input type="password" name="password_confirmation" />
+            <span className="error"></span>
           </div>
+
           <div>
-            <button className="submit">Submit</button>
+            <button className="submit">Create account</button>
+            <span className="returnError"></span>
           </div>
         </form>
-        <div>
+        <div className="sign-up">
           <div>Already have an account?</div>
-          <Link to="/sign-in">Sign-in</Link>
+          <Link to="/sign-in">Login</Link>
         </div>
       </div>
     </div>

@@ -57,10 +57,10 @@ const validateField = (field) => {
     const spanError = spanErrorParent.querySelector("span.error");
 
     if (message) {
-      spanErrorParent.classList.add("error");
+      //spanErrorParent.classList.add("error");
       spanError.innerHTML = message;
     } else {
-      spanErrorParent.classList.remove("error");
+      //spanErrorParent.classList.remove("error");
       spanError.innerHTML = "";
     }
   };

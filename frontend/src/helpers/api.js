@@ -44,5 +44,7 @@ export const apiRefreshToken = () => {
     },
   };
 
+  if (!refreshToken) return;
+
   return axios.post(url, {}, options);
 };

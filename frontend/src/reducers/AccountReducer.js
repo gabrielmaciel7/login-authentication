@@ -20,11 +20,11 @@ import {
 const initialState = {
   account: null,
   accounts: [],
-  message: "",
+  messageError: null,
 };
 
 export default function (state = initialState, action) {
-  const { type, payload } = action;
+  const { type, payload, messageError } = action;
 
   switch (type) {
     case SIGN_IN:
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
       if (token) setToken(token);
       if (refreshToken) setRefreshToken(refreshToken);
 
-      return { ...state, account };
+      return { ...state, account, messageError };
 
     case SIGN_OUT: {
       removeAccount();
