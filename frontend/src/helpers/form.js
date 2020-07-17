@@ -14,8 +14,6 @@ export const addEvents = () => {
       customValidation(event);
     });
 
-    console.log("add event");
-
     field.addEventListener("blur", customValidation);
   }
 };
