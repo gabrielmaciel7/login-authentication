@@ -10,8 +10,9 @@ export const REFRESH_TOKEN = "REFRESH_TOKEN";
 export const signIn = async (data) => {
   let messageError = null;
   const payload = await apiPost("/auth/sign-in", data).catch((error) => {
-    messageError =
-      error.response.data.message || error.response.data.metadata.error;
+    messageError = error.response
+      ? error.response.data.message || error.response.data.metadata.error
+      : "Server error.";
   });
 
   return { type: SIGN_IN, payload, messageError };
@@ -20,8 +21,9 @@ export const signIn = async (data) => {
 export const signUp = async (data) => {
   let messageError = null;
   const payload = await apiPost("/auth/sign-up", data).catch((error) => {
-    messageError =
-      error.response.data.message || error.response.data.metadata.error;
+    messageError = error.response
+      ? error.response.data.message || error.response.data.metadata.error
+      : "Server error.";
   });
 
   return { type: SIGN_UP, payload, messageError };

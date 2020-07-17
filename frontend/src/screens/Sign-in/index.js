@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signIn } from "../../actions/AccountActions";
-import { getFormData, customValidation } from "../../helpers/form";
+import { getFormData, addEvents } from "../../helpers/form";
 
 const SignIn = (props) => {
   const { signIn, account, messageError } = props;
@@ -24,19 +24,10 @@ const SignIn = (props) => {
     }
   }, [messageError, account, error]);
 
+  useEffect(() => addEvents(), []);
+
   if (account) {
     return <Redirect to="/manage/portal" />;
-  }
-
-  const fields = document.querySelectorAll("[required]");
-
-  for (let field of fields) {
-    field.addEventListener("invalid", (event) => {
-      event.preventDefault();
-      customValidation(event);
-    });
-
-    field.addEventListener("blur", customValidation);
   }
 
   const submitHandler = async (e) => {

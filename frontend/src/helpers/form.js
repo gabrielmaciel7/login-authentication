@@ -5,7 +5,22 @@ export const getFormData = (e) => {
   return data;
 };
 
-export const customValidation = (event) => {
+export const addEvents = () => {
+  const fields = document.querySelectorAll("[required]");
+
+  for (let field of fields) {
+    field.addEventListener("invalid", (event) => {
+      event.preventDefault();
+      customValidation(event);
+    });
+
+    console.log("add event");
+
+    field.addEventListener("blur", customValidation);
+  }
+};
+
+const customValidation = (event) => {
   const field = event.target;
   const validation = validateField(field);
 
@@ -29,8 +44,18 @@ const validateField = (field) => {
         foundError = error;
       }
 
-      if (field.type === "password") {
-        if (field.value.length < MIN_PASS_CHAR) foundError = "typeMismatch";
+      if (
+        field.type === "password" &&
+        field.value.length > 0 &&
+        field.value.length < MIN_PASS_CHAR
+      ) {
+        foundError = "typeMismatch";
+      }
+
+      if (field.name === "password_confirmation") {
+        const password = document.querySelector("input[name='password']");
+
+        if (field.value !== password.value) foundError = "differentPass";
       }
     }
 
@@ -47,9 +72,14 @@ const validateField = (field) => {
         valueMissing: "Password is required.",
         typeMismatch: "Invalid password.",
       },
+      password_confirmation: {
+        valueMissing: "Password confirmation is required.",
+        typeMismatch: "Invalid password confirmation.",
+        differentPass: "Password confirmation must be equal the password.",
+      },
     };
 
-    return messages[field.type][typeError];
+    return messages[field.name][typeError];
   };
 
   const setCustomMessage = (message = "") => {

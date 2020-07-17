@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signUp } from "../../actions/AccountActions";
-import { getFormData } from "../../helpers/form";
+import { getFormData, addEvents } from "../../helpers/form";
 
 const SignUp = (props) => {
-  const { signUp, account } = props;
+  const { signUp, account, messageError } = props;
 
-  const submitHandler = (e) => {
+  const [error, setError] = useState(false);
+  const [redirectToPortal, setRedirectToPortal] = useState(false);
+
+  useEffect(() => {
+    if (messageError && !account && !error) {
+      const span = document.querySelector("span.returnError");
+
+      span.innerHTML = messageError;
+
+      const timer = setTimeout(() => {
+        span.innerHTML = "";
+        setError(true);
+      }, 8000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [messageError, account, error]);
+
+  useEffect(() => addEvents(), []);
+
+  if (account) {
+    setTimeout(() => {
+      setRedirectToPortal(true);
+    }, 3000);
+  }
+
+  if (redirectToPortal) {
+    return <Redirect to="/manage/portal" />;
+  }
+
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     const data = getFormData(e);
 
-    signUp(data);
-  };
+    await signUp(data);
 
-  if (account) {
-    return <Redirect to="/sign-in" />;
-  }
+    setError(false);
+  };
 
   return (
     <div className="container">
@@ -53,12 +81,21 @@ const SignUp = (props) => {
           <Link to="/sign-in">Login</Link>
         </div>
       </div>
+
+      {account && !redirectToPortal ? (
+          <div className="successModal">
+            <h1>Account Created!</h1>
+          </div>
+      ) : null}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  return { account: state.account.account };
+  return {
+    account: state.account.account,
+    messageError: state.account.messageError,
+  };
 };
 
 export default connect(mapStateToProps, { signUp })(SignUp);

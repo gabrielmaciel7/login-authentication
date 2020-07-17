@@ -20,27 +20,34 @@ const Portal = ({ signOut, account, users, usersList }) => {
   };
 
   return (
-    <>
-      <div>
-        <h1>Portal</h1>
-        <button onClick={signOutHandler}>Logout</button>
-      </div>
-      <div>
-        <span>{`Hello, ${account.email}`}</span>
-        <br />
-        <h4>Users list</h4>
+    <div className="portalContainer">
+      <header>
+        <div className="menu">
+          <h1>Portal</h1>
+          <button onClick={signOutHandler}>Logout</button>
+        </div>
+      </header>
+      <div className="portalContent">
+        <div className="hello">
+          <h4>{`Hello, ${account.email}`}</h4>
+        </div>
+        <div className="users-list">
+          <h3>Users list</h3>
 
-        {users && users.length
-          ? users.map((user) => {
-              return (
-                <div key={user._id}>
-                  <span>{user.email}</span>
-                </div>
-              );
-            })
-          : null}
+          <div className="list">
+            {users && users.length
+              ? users.map((user) => {
+                  return (
+                    <div key={user._id}>
+                      <p>{user.email}</p>
+                    </div>
+                  );
+                })
+              : null}
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
