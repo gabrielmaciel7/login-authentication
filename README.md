@@ -1,6 +1,6 @@
 <h1> Login authentication </h1> 
 
-<h4> Application for login authentication
+<h4> App for login authentication and validation, built with JWT, refresh token and Redux
 </h4>
 
 <br>
